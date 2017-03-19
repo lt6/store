@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lt.core.dao.ContentDao" >
+  <resultMap id="BaseResultMap" type="com.lt.core.bean.Content" >
+    <id column="id" property="id" />
+    <result column="price" property="price"  />
+    <result column="title" property="title"  />
+    <result column="abstractt" property="abstractt" />
+    <result column="icon" property="icon"  />
+    <result column="text" property="text" />
+  </resultMap>
+  
+  	<!-- 发布内容-->
+	<insert id="addContent" parameterType="Content">
+		insert into content
+		<trim prefix="(" suffix=")">
+			price,
+			title,
+			icon,
+			abstractt,
+			text
+		</trim>
+		values
+		<trim prefix="(" suffix=")">
+			#{price},
+			#{title},
+			#{icon},
+			#{abstractt},
+			#{text}
+		</trim>
+	</insert>
+</mapper>

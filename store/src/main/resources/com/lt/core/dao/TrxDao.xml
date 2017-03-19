@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lt.core.dao.TrxDao">
+  <resultMap id="trx" type="com.lt.core.bean.Trx">
+    <id column="id" property="id"/>
+    <result column="contentId" property="contentid"/>
+    <result column="personId" property="personid"/>
+    <result column="price" property="price"/>
+    <result column="time" property="time"/>
+  </resultMap>
+ <insert id="addTrx" parameterType="com.lt.core.bean.Trx" >
+    insert into trx (id, contentId, personId, 
+      price, time)
+    values (#{id,jdbcType=INTEGER}, #{contentid,jdbcType=INTEGER}, #{personid,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{time,jdbcType=BIGINT})
+  </insert>
+</mapper>
