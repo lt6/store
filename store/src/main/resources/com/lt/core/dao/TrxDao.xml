@@ -8,10 +8,5 @@
     <result column="price" property="price"/>
     <result column="time" property="time"/>
   </resultMap>
- <insert id="addTrx" parameterType="com.lt.core.bean.Trx" >
-    insert into trx (id, contentId, personId, 
-      price, time)
-    values (#{id,jdbcType=INTEGER}, #{contentid,jdbcType=INTEGER}, #{personid,jdbcType=INTEGER}, 
-      #{price,jdbcType=INTEGER}, #{time,jdbcType=BIGINT})
-  </insert>
+ 
 </mapper>

@@ -1,5 +1,8 @@
 package com.lt.core.bean;
 
+import com.lt.web.Constants;
+
+
 public class Content {
     private Integer id;
 
@@ -7,11 +10,15 @@ public class Content {
 
     private String title;
 
-    private String abstractt;
+    private String summary;
     
-    private String icon;
+    private String image;
 
-    private String text;
+    private String detail;
+  //获取全路径
+  	public String getAllUrl(){
+  		return Constants.IMAGE_URL + image;
+  	}
 
 	public Integer getId() {
 		return id;
@@ -37,29 +44,33 @@ public class Content {
 		this.title = title;
 	}
 
-	public String getAbstractt() {
-		return abstractt;
+	public String getSummary() {
+		return summary;
 	}
 
-	public void setAbstractt(String abstractt) {
-		this.abstractt = abstractt;
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
-	public String getIcon() {
-		return icon;
+	public String getImage() {
+		return image;
 	}
 
-	public void setIcon(String icon) {
-		this.icon = icon;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
-	public String getText() {
-		return text;
+	public String getDetail() {
+		return detail;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
+    
+    
+    
+
 
 	
     

@@ -1,6 +1,7 @@
 package com.lt.core.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Trx implements Serializable{
     private Integer id;
@@ -11,7 +12,7 @@ public class Trx implements Serializable{
 
     private Integer price;
 
-    private Long time;
+    private Date time;
 
 	public Integer getId() {
 		return id;
@@ -45,13 +46,15 @@ public class Trx implements Serializable{
 		this.price = price;
 	}
 
-	public Long getTime() {
+	public Date getTime() {
 		return time;
 	}
 
-	public void setTime(Long time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
+
+
 
  
 }

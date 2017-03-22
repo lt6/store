@@ -5,9 +5,9 @@
     <id column="id" property="id" />
     <result column="price" property="price"  />
     <result column="title" property="title"  />
-    <result column="abstractt" property="abstractt" />
-    <result column="icon" property="icon"  />
-    <result column="text" property="text" />
+    <result column="summary" property="summary" />
+    <result column="image" property="image"  />
+    <result column="detail" property="detail" />
   </resultMap>
   
   	<!-- 发布内容-->
@@ -16,17 +16,17 @@
 		<trim prefix="(" suffix=")">
 			price,
 			title,
-			icon,
-			abstractt,
-			text
+			image,
+			summary,
+			detail
 		</trim>
 		values
 		<trim prefix="(" suffix=")">
 			#{price},
 			#{title},
-			#{icon},
-			#{abstractt},
-			#{text}
+			#{image},
+			#{summary},
+			#{detail}
 		</trim>
 	</insert>
 </mapper>
