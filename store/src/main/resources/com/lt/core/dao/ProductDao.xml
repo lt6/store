@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lt.core.dao.ProductDao" >
+  <resultMap id="product" type="com.lt.core.bean.Product" >
+    <id column="id" property="id" />
+    <result column="price" property="price"  />
+    <result column="title" property="title"  />
+    <result column="summary" property="summary" />
+    <result column="image" property="image"  />
+    <result column="detail" property="detail" />
+    <result column="isBuy" property="isBuy"  />
+    <result column="buyPrice" property="buyPrice"  />
+    <result column="buyNum" property="buyNum" />
+    <result column="buyTime" property="buyTime"  />
+    <result column="isSell" property="isSell" />
+    <result column="saleNum" property="saleNum"  />
+  </resultMap>
+  
+   	<!-- 发布内容-->
+<!-- 	<insert id="addContent" parameterType="Content" useGeneratedKeys="true" keyProperty="id">
+		insert into content
+		<trim prefix="(" suffix=")">
+			price,
+			title,
+			image,
+			summary,
+			detail
+		</trim>
+		values
+		<trim prefix="(" suffix=")">
+			#{price},
+			#{title},
+			#{image},
+			#{summary},
+			#{detail}
+		</trim>
+	</insert>
+	通过ID查询一个发布产品
+	<select id="selectContentByKey" parameterType="Integer" resultMap="content" >
+		select id,price,image,summary,detail
+		from content
+		<where>
+			id = #{id}
+		</where>
+	</select>
+	根据主键修改内容
+	<update id="updateContentByKey" parameterType="Content">
+		update content
+		<set>
+			<if test="price!= null">
+				price=#{price},
+			</if>
+			<if test="title != null">
+				title=#{title},
+			</if>
+			<if test="image != null">
+				image=#{image},
+			</if>
+			<if test="summary != null">
+				summary=#{summary},
+			</if>
+			<if test="detail != null">
+				detail=#{detail}
+			</if>
+		</set>
+		<where>
+			id=#{id}
+		</where>
+	</update>  -->
+</mapper>

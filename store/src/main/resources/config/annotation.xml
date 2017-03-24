@@ -17,5 +17,7 @@
 	
     <context:annotation-config/>
 	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+		<!-- Session实例化 -->
+	<bean id="sessionProvider" class="com.lt.common.session.HttpSessionProvider"/>
 	
 </beans>

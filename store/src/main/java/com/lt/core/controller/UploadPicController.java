@@ -31,7 +31,7 @@ import com.lt.web.Constants;
 
 @Controller
 public class UploadPicController extends HttpServlet{
-	@RequestMapping(value = "/uploadPic.do")
+	@RequestMapping(value = "/uploadPic")
 	public void uploadPic(HttpServletRequest request,PrintWriter out, HttpServletResponse response)
 			throws ServletException, IOException {
 				request.setCharacterEncoding("utf-8");

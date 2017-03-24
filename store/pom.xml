@@ -49,7 +49,11 @@
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 </properties>
   <dependencies>
- 
+  	<dependency>
+    	<groupId>commons-beanutils</groupId>
+    	<artifactId>commons-beanutils</artifactId>
+    	<version>1.8.3</version>
+	</dependency>
   	  	<!-- with junit4.8.2 -->
 		<dependency>
 			<groupId>junit</groupId>
