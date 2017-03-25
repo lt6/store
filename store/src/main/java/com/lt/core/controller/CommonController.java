@@ -1,5 +1,7 @@
 package com.lt.core.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lt.common.ResponseUtils;
 import com.lt.common.session.SessionProvider;
+import com.lt.core.bean.Product;
 import com.lt.core.bean.User;
+import com.lt.core.service.product.ProductService;
 import com.lt.core.service.user.UserService;
 import com.lt.web.Constants;
 
@@ -26,6 +30,8 @@ public class CommonController extends HttpServlet{
 	private SessionProvider sessionProvider;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ProductService productService;
 	
 	//去首页
 	@RequestMapping(value = "/index.do")
@@ -33,6 +39,8 @@ public class CommonController extends HttpServlet{
 		//加载用户
 		User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
 		model.addAttribute("user", user);
+		List<Product> productList=productService.getProductList();
+		model.put("productList", productList);
 		return "index";
 	}
 	//去登录页

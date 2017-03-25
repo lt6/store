@@ -1,5 +1,9 @@
 package com.lt.core.dao;
 
+import java.util.List;
+
+import com.lt.core.bean.Product;
+
 
 
 public interface ProductDao {
@@ -9,4 +13,6 @@ public interface ProductDao {
 	public Content show(Integer id);
 	//修改内容
 	public void updateContentByKey(Content content);*/
+	//查询商品集合
+	public  List<Product> getProductList();
 }

@@ -15,6 +15,11 @@
     <result column="isSell" property="isSell" />
     <result column="saleNum" property="saleNum"  />
   </resultMap>
+  	<!-- 查询商品集合*   -->
+	<select id="getProductList" resultMap="product">
+		select id,title,image,price,isBuy,isSell
+		from product
+	</select>
   
    	<!-- 发布内容-->
 <!-- 	<insert id="addContent" parameterType="Content" useGeneratedKeys="true" keyProperty="id">
