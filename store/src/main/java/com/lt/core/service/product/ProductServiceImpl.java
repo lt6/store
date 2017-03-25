@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 
+
 import com.lt.core.bean.Product;
 import com.lt.core.dao.ProductDao;
 @Service
@@ -20,6 +21,12 @@ public class ProductServiceImpl implements ProductService {
 		List<Product> productList=productDao.getProductList();
 		
 		return productList;
+	}
+
+
+	public Product show(Integer id) {
+		Product product=productDao.show(id);
+		return product;
 	}
 
 	/*	

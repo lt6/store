@@ -14,6 +14,10 @@ public interface ProductService {
 	
 	//编辑发布内容
 	public Content edit(Integer id);*/
+	
 	//查询所有商品
 	List<Product> getProductList();
+	
+	//通过id查看商品
+	public Product show(Integer id);
 }

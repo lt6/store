@@ -20,6 +20,15 @@
 		select id,title,image,price,isBuy,isSell
 		from product
 	</select>
+	
+	  <!-- 通过ID查询一个发布商品-->
+	<select id="show" parameterType="Integer" resultMap="product" >
+		select *
+		from product
+		<where>
+			id = #{id}
+		</where>
+	</select>
   
    	<!-- 发布内容-->
 <!-- 	<insert id="addContent" parameterType="Content" useGeneratedKeys="true" keyProperty="id">
@@ -40,14 +49,7 @@
 			#{detail}
 		</trim>
 	</insert>
-	通过ID查询一个发布产品
-	<select id="selectContentByKey" parameterType="Integer" resultMap="content" >
-		select id,price,image,summary,detail
-		from content
-		<where>
-			id = #{id}
-		</where>
-	</select>
+
 	根据主键修改内容
 	<update id="updateContentByKey" parameterType="Content">
 		update content
