@@ -27,6 +27,7 @@ public class CommonController extends HttpServlet{
 	@Autowired
 	private UserService userService;
 	
+	//去首页
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request,ModelMap model){
 		//加载用户
@@ -34,10 +35,12 @@ public class CommonController extends HttpServlet{
 		model.addAttribute("user", user);
 		return "index";
 	}
+	//去登录页
 	@RequestMapping(value = "/login.do")
 	public String login(){
 		return "login";
 	}
+	//确认登录
 	@RequestMapping(value = "/api/login.do")
 	public void login (HttpServletRequest request,HttpServletResponse response,ModelMap model){
 			String userName=request.getParameter("userName");
@@ -64,6 +67,12 @@ public class CommonController extends HttpServlet{
 				ResponseUtils.renderJson(response, jo.toString());
 			}
 
+	}
+	//退出登录
+	@RequestMapping(value = "/logout.do")
+	public String logout(HttpServletRequest request,HttpServletResponse response){
+		sessionProvider.logout(request, response);
+		return "index";
 	}
 	
 	
