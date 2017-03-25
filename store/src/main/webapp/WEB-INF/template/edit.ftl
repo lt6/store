@@ -7,7 +7,7 @@
     <div class="m-tab m-tab-fw m-tab-simple f-cb">
         <h2>内容编辑</h2>
     </div>
-    <#if !content>
+    <#if !product>
     <div class="n-result">
         <h3>内容不存在！</h3>
     </div>
@@ -17,14 +17,14 @@
             <div class="fmitem">
                 <label class="fmlab">标题：</label>
                 <div class="fmipt">
-                    <input type="hidden" name="id" value="${content.id}"/>
-                    <input class="u-ipt ipt" name="title" value="${content.title}" placeholder="2-80字符"/>
+                    <input type="hidden" name="id" value="${product.id}"/>
+                    <input class="u-ipt ipt" name="title" value="${product.title}" placeholder="2-80字符"/>
                 </div>
             </div>
             <div class="fmitem">
                 <label class="fmlab">摘要：</label>
                 <div class="fmipt">
-                    <input class="u-ipt ipt" name="summary" value="${content.summary}" placeholder="2-140字符"／>
+                    <input class="u-ipt ipt" name="summary" value="${product.summary}" placeholder="2-140字符"／>
                 </div>
             </div>
             <div class="fmitem">
@@ -47,13 +47,13 @@
             <div class="fmitem">
                 <label class="fmlab">正文：</label>
                 <div class="fmipt">
-                    <textarea class="u-ipt" name="detail" rows="10" placeholder="2-1000个字符">${content.detail}</textarea>
+                    <textarea class="u-ipt" name="detail" rows="10" placeholder="2-1000个字符">${product.detail}</textarea>
                 </div>
             </div>
             <div class="fmitem">
                 <label class="fmlab">价格：</label>
                 <div class="fmipt">
-                    <input class="u-ipt price" name="price" value="${content.price}"/>元
+                    <input class="u-ipt price" name="price" value="${product.price}"/>元
                 </div>
             </div>
             <div class="fmitem fmitem-nolab fmitem-btn">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </form>
-        <span class="imgpre"><img src="${content.image}" alt="" id="imgpre"></span>
+        <span class="imgpre"><img src="${product.image}" alt="" id="imgpre"></span>
     </div>
     </#if>
 </div>

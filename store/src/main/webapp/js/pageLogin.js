@@ -17,7 +17,7 @@
 					loading.show();
 					ajax({
 						data:{userName:value1,password:value2},
-						url:'/login.do',
+						url:'/api/login.do',
 						success:function(result){
 							loading.hide();
 							location.href = '/index.do';

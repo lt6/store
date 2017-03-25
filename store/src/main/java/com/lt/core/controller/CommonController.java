@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lt.common.ResponseUtils;
 import com.lt.common.session.SessionProvider;
-
+import com.lt.core.bean.User;
+import com.lt.core.service.user.UserService;
 import com.lt.web.Constants;
 
 
@@ -21,32 +22,31 @@ import com.lt.web.Constants;
 @Controller
 public class CommonController extends HttpServlet{
 	
-/*	@Autowired
+	@Autowired
 	private SessionProvider sessionProvider;
 	@Autowired
-	private PersonService personService;
+	private UserService userService;
 	
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request,ModelMap model){
 		//加载用户
-		Person user = (Person) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
-		//Buyer b = buyerService.getBuyerByKey(buyer.getUsername());
+		User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
 		model.addAttribute("user", user);
 		return "index";
-	}*/
-	@RequestMapping(value = "/login")
+	}
+	@RequestMapping(value = "/login.do")
 	public String login(){
 		return "login";
 	}
-	/*@RequestMapping(value = "/login.do")
+	@RequestMapping(value = "/api/login.do")
 	public void login (HttpServletRequest request,HttpServletResponse response,ModelMap model){
 			String userName=request.getParameter("userName");
 			String password=request.getParameter("password");
-			Person user=personService.getPersonByUsername(userName);
+			System.out.println(userName);
+			User user=userService.getUserByUsername(userName);
 			if(user.getPassword().equals(password)){
 				System.out.println(user.getPassword());
 			//把用户对象放在Session
-
 			//model.addAttribute("user", user);
 			sessionProvider.setAttribute(request, Constants.PERSON_SESSION, user);
 			JSONObject jo = new JSONObject();
@@ -63,9 +63,8 @@ public class CommonController extends HttpServlet{
 				jo.put("result", false);
 				ResponseUtils.renderJson(response, jo.toString());
 			}
-		
 
-	}*/
+	}
 	
 	
 }

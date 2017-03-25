@@ -9,11 +9,11 @@
   </resultMap>
   
   	<!-- 登录查询   -->
-	<select id="getPersonByUsername" parameterType="String" resultMap="user">
-		select id,userName,password,usertype
-		from person
+	<select id="getUserByUsername" parameterType="String" resultMap="user">
+		select id,userName,password,userType
+		from user
 		<where>
-		 userName = #{userName}
+		userName = #{userName}
 		</where>
 	</select>
   </mapper>

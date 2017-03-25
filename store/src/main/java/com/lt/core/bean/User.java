@@ -1,13 +1,15 @@
 package com.lt.core.bean;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     private Integer id;
 
     private String userName;
 
     private String password;
 
-    private Integer usertype;
+    private Integer userType;
 
 	public Integer getId() {
 		return id;
@@ -33,13 +35,16 @@ public class User {
 		this.password = password;
 	}
 
-	public Integer getUsertype() {
-		return usertype;
+	public Integer getUserType() {
+		return userType;
 	}
 
-	public void setUsertype(Integer usertype) {
-		this.usertype = usertype;
+	public void setUserType(Integer userType) {
+		this.userType = userType;
 	}
-    
+
+
+
+	
     
 }

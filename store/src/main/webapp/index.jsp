@@ -1,2 +1,2 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<% response.sendRedirect("/index"); %>
+<% response.sendRedirect("/index.do"); %>
