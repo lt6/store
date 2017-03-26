@@ -7,8 +7,7 @@ import com.lt.core.bean.Product;
 
 
 public interface ProductDao {
-/*	//发布内容
-	public Integer addContent(Content content);
+/*	
 	//查询内容
 	public Content show(Integer id);
 	//修改内容
@@ -19,4 +18,6 @@ public interface ProductDao {
 	public  List<Product> getBuyList();
 	//通过id查看商品
 	public Product show(Integer id);
+	//添加商品
+	public int addProduct(Product product);
 }

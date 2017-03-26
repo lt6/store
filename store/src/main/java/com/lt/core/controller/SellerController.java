@@ -35,13 +35,22 @@ public class SellerController extends HttpServlet{
 			return "login";
 		}
 	}
-	
-	/*	//发布内容
-	@RequestMapping(value = "/addContent.do")
-	public String add(Content content,ModelMap model){
-		contentService.addContent(content);
-		return "publicSubmit";
+
+	//发布提交
+	@RequestMapping(value = "/publicSubmit.do")
+	public String publicSubmit(HttpServletRequest request,Product product,ModelMap model){
+		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
+			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+			model.addAttribute("user", user);
+			productService.addProduct(product);
+			model.put("product", product);
+			return "publicSubmit";
+		}else{
+			return "login";
+		}
 	}
+	
+	/*	/
 	//编辑发布内容
 	@RequestMapping(value = "/edit.do")
 	public String show(Integer id,ModelMap model){
@@ -54,14 +63,6 @@ public class SellerController extends HttpServlet{
 	public String doEdit(Content content){
 		return "edit";
 	}
-	//跳转发布页面
-	@RequestMapping(value= "/toAddContent.do")
-	public String toAdd(HttpServletRequest request){
-		if((Person) sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-			return "public";
-		}else{
-			return "login";
-		}	
-	}*/
+	*/
 
 }

@@ -41,9 +41,9 @@
 		</where>
 	</select>
   
-   	<!-- 发布内容-->
-<!-- 	<insert id="addContent" parameterType="Content" useGeneratedKeys="true" keyProperty="id">
-		insert into content
+   	<!-- 发布提交-->
+	<insert id="addProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+		insert into product
 		<trim prefix="(" suffix=")">
 			price,
 			title,
@@ -60,7 +60,7 @@
 			#{detail}
 		</trim>
 	</insert>
-
+<!-- 
 	根据主键修改内容
 	<update id="updateContentByKey" parameterType="Content">
 		update content
