@@ -49,15 +49,22 @@ public class SellerController extends HttpServlet{
 			return "login";
 		}
 	}
+	//编辑页
+	@RequestMapping(value = "/edit.do")
+	public String edit(HttpServletRequest request,Integer id,ModelMap model){
+		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
+			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+			model.addAttribute("user", user);
+			Product product=productService.show(id);
+			model.put("product", product);
+			return "edit";
+		}else{
+			return "login";
+		}
+	}
 	
 	/*	/
-	//编辑发布内容
-	@RequestMapping(value = "/edit.do")
-	public String show(Integer id,ModelMap model){
-		Content content=contentService.edit(id);
-		model.addAttribute("content", content);
-		return "edit";
-	}
+
 	//完成编辑
 	@RequestMapping(value = "/doEdit.do")
 	public String doEdit(Content content){
