@@ -14,7 +14,7 @@
             <li><a href="/settleAccount.do">购物车</a></li>
             </#if>
             <#if user && user.userType==1>
-            <li><a href="/public">发布</a></li>
+            <li><a href="/public.do">发布</a></li>
             </#if>
         </ul>
     </div>

@@ -1,5 +1,7 @@
 package com.lt.core.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,18 +11,32 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lt.common.session.SessionProvider;
+import com.lt.core.bean.Product;
+import com.lt.core.bean.User;
 import com.lt.core.service.product.ProductService;
 import com.lt.web.Constants;
 
 
 @Controller
 public class SellerController extends HttpServlet{
-/*	@Autowired
-	private ContentService contentService;
+	@Autowired
+	private ProductService productService;
 	@Autowired
 	private SessionProvider sessionProvider;
 	
-	//发布内容
+	//去发布页
+	@RequestMapping(value = "/public.do")
+	public String toPublic(HttpServletRequest request,ModelMap model){
+		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
+			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+			model.addAttribute("user", user);
+			return "public";
+		}else{
+			return "login";
+		}
+	}
+	
+	/*	//发布内容
 	@RequestMapping(value = "/addContent.do")
 	public String add(Content content,ModelMap model){
 		contentService.addContent(content);
@@ -36,7 +52,6 @@ public class SellerController extends HttpServlet{
 	//完成编辑
 	@RequestMapping(value = "/doEdit.do")
 	public String doEdit(Content content){
-	
 		return "edit";
 	}
 	//跳转发布页面
@@ -46,7 +61,7 @@ public class SellerController extends HttpServlet{
 			return "public";
 		}else{
 			return "login";
-		}
-			
+		}	
 	}*/
+
 }
