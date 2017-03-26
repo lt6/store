@@ -8,7 +8,7 @@ public class Constants {
 	 */
 	public static final String IMAGE_URL = "http://localhost:8080/";
 	/**
-	 * 登陆者Cookie
+	 * 登陆者SESSION
 	 */
 	public static final String PERSON_SESSION = "person_session";
 }

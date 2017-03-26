@@ -15,6 +15,8 @@ public interface ProductDao {
 	public void updateContentByKey(Content content);*/
 	//查询商品集合
 	public  List<Product> getProductList();
+	//查询已购买商品集合
+	public  List<Product> getBuyList();
 	//通过id查看商品
 	public Product show(Integer id);
 }

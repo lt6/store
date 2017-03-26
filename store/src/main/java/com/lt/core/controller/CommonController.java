@@ -37,16 +37,45 @@ public class CommonController extends HttpServlet{
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request,ModelMap model){
 		//加载用户
-		User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
-		model.addAttribute("user", user);
-		List<Product> productList=productService.getProductList();
-		model.put("productList", productList);
-		return "index";
+		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
+			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+/*			Integer type=user.getUserType();
+			System.out.println(user.getUserType());
+			model.addAttribute("type", type);*/
+			model.addAttribute("user", user);
+			List<Product> productList=productService.getProductList();
+			model.put("productList", productList);
+			return "index";
+		}else{
+			List<Product> productList=productService.getProductList();
+			model.put("productList", productList);
+			return "index";
+		}
+
 	}
 	//去登录页
 	@RequestMapping(value = "/login.do")
 	public String login(){
 		return "login";
+	}
+	
+	
+	//去查看页
+	@RequestMapping(value = "/show.do")
+	public String show(HttpServletRequest request,Integer id,ModelMap model){
+		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
+			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+			System.out.println(user.getUserType());
+			model.addAttribute("user", user);
+			Product product=productService.show(id);
+			model.addAttribute("product", product);
+			return "show";
+		}else{
+			Product product=productService.show(id);
+			model.addAttribute("product", product);
+			return "show";
+		}
+
 	}
 	//确认登录
 	@RequestMapping(value = "/api/login.do")
@@ -78,9 +107,10 @@ public class CommonController extends HttpServlet{
 	}
 	//退出登录
 	@RequestMapping(value = "/logout.do")
-	public String logout(HttpServletRequest request,HttpServletResponse response){
+	public String logout(HttpServletRequest request,HttpServletResponse response,ModelMap model){
+		User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
 		sessionProvider.logout(request, response);
-		return "index";
+		return "redirect:/login.do";
 	}
 	
 	

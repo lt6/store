@@ -29,6 +29,12 @@ public class ProductServiceImpl implements ProductService {
 		return product;
 	}
 
+
+	public List<Product> getBuyList() {
+		List<Product> buyList=productDao.getBuyList();
+		return buyList;
+	}
+
 	/*	
 	//发布内容
 	public Integer addContent(Content content) {

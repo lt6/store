@@ -15,11 +15,22 @@
     <result column="isSell" property="isSell" />
     <result column="saleNum" property="saleNum"  />
   </resultMap>
-  	<!-- 查询商品集合*   -->
+  	<!-- 查询商品集合-->
 	<select id="getProductList" resultMap="product">
 		select id,title,image,price,isBuy,isSell
 		from product
 	</select>
+	
+	  	<!-- 查询已购买商品集合 -->
+	<select id="getBuyList" resultMap="product">
+		select id,title,image,buyPrice,buyNum,buyTime
+		from product
+		<where>
+			isBuy = 1
+		</where>
+	</select>
+	
+	
 	
 	  <!-- 通过ID查询一个发布商品-->
 	<select id="show" parameterType="Integer" resultMap="product" >
