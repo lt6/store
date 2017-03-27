@@ -10,6 +10,18 @@ public class User implements Serializable{
     private String password;
 
     private Integer userType;
+    
+    private Integer number;
+    
+    
+
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
 
 	public Integer getId() {
 		return id;

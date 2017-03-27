@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 
+
 import com.lt.core.bean.Product;
 import com.lt.core.dao.ProductDao;
 @Service
@@ -35,16 +36,33 @@ public class ProductServiceImpl implements ProductService {
 		return buyList;
 	}
 	
-	//发布内容
+	
 	public void addProduct(Product product) {
 		 productDao.addProduct(product);
 	}
 
-	/*	
 
-	//编辑发布内容
-	public Content edit(Integer id) {
-		return contentDao.show(id);
-	}*/
+	public void updateProductByKey(Product product) {
+		productDao.updateProductByKey(product);
+	}
+
+
+	public void buyProduct(Product product) {
+		productDao.buyProduct(product);
+		
+	}
+
+
+	public List<Product> getUnBuyList() {
+		List<Product> unBuyList=productDao.getUnBuyList();
+		return unBuyList;
+	}
+
+
+	public void deleteProduct(Integer id) {
+		productDao.deleteProductByKey(id);
+	}
+
+	
 
 }

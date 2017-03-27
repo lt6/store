@@ -1,14 +1,44 @@
 package com.lt.core.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+
+
+
+
+
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONArray;
+import com.lt.common.ResponseUtils;
 import com.lt.common.session.SessionProvider;
 import com.lt.core.bean.Product;
 import com.lt.core.bean.User;
@@ -16,7 +46,7 @@ import com.lt.core.service.product.ProductService;
 import com.lt.web.Constants;
 
 @Controller
-public class BuyerController {
+public class BuyerController extends HttpServlet{
 	@Autowired
 	private ProductService productService;
 	@Autowired
@@ -36,6 +66,25 @@ public class BuyerController {
 		}
 
 	}
+	//查看未购买商品
+	@RequestMapping(value = "/unBuy.do")
+	public String unBuy(HttpServletRequest request,ModelMap model){
+		//加载用户
+		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
+			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+			Integer type=user.getUserType();
+			model.addAttribute("listType", type);
+			model.addAttribute("user", user);
+			List<Product> productList=productService.getBuyList();
+			model.put("productList", productList);
+			return "index";
+		}else{
+			List<Product> productList=productService.getProductList();
+			model.put("productList", productList);
+			return "index";
+		}
+
+	}
 
 		//去购物车
 		@RequestMapping(value = "/settleAccount.do")
@@ -48,6 +97,35 @@ public class BuyerController {
 				return "login";
 			}
 
+		}
+		//确认购买
+		@RequestMapping(value = "/api/buy.do", method = {RequestMethod.POST })
+		@ResponseBody
+		public String buy(@RequestBody String buyList,HttpServletRequest request,HttpServletResponse response,ModelMap model) {
+		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
+			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+			model.addAttribute("user", user);
+			List<Product> pro_list = new ArrayList<Product>(JSONArray.parseArray(buyList, Product.class));
+			for(Product p : pro_list){
+				Product product=new Product();
+				product.setId(p.getId());
+				product.setIsBuy(true);
+				product.setIsSell(true);
+				product.setBuyNum(p.getNumber());
+				product.setSaleNum(p.getNumber());
+				product.setBuyTime(new Date());
+				productService.buyProduct(product);
+			} 
+					JSONObject jo = new JSONObject();
+					int code=200;
+					jo.put("code",code);
+					jo.put("message", "购买成功");
+					jo.put("result", true);
+					ResponseUtils.renderJson(response, jo.toString());
+					return null;
+			}else{
+				return "login";
+			}			
 		}
 	
 }

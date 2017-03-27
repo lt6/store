@@ -77,7 +77,7 @@
 				                if(status >= 200 && status < 300 || status == 304){
 				                	var json = JSON.parse(xhr.responseText);
 				                	if(json && json.code == 200){
-				                		loading.result('购买成功',function(){location.href = './account.html';});
+				                		loading.result('购买成功',function(){location.href = '/account.do';});
 				                		util.deleteCookie(name);
 				                	}else{
 				                		alert(json.message);
@@ -87,7 +87,7 @@
 				                }
 				            }
 					};
-					 xhr.open('post','/api/buy');
+					 xhr.open('post','/api/buy.do');
 					 xhr.setRequestHeader('Content-Type','application/json');
 					 xhr.send(data);
 				}.bind(this)

@@ -29,7 +29,22 @@
 			isBuy = 1
 		</where>
 	</select>
+		  	<!-- 查询未购买商品集合 -->
+	<select id="getUnBuyList" resultMap="product">
+		select id,title,image,buyPrice,buyNum,buyTime
+		from product
+		<where>
+			isBuy != 1
+		</where>
+	</select>
 	
+	<!-- 删除 通过主键 -->
+	<delete id="deleteProductByKey" parameterType="Integer">
+		delete from product
+		<where>
+			id = #{id}
+		</where>
+	</delete>
 	
 	
 	  <!-- 通过ID查询一个发布商品-->
@@ -60,10 +75,10 @@
 			#{detail}
 		</trim>
 	</insert>
-<!-- 
-	根据主键修改内容
-	<update id="updateContentByKey" parameterType="Content">
-		update content
+ 
+	<!-- 修改发布内容-->
+	<update id="updateProductByKey" parameterType="Product">
+		update product
 		<set>
 			<if test="price!= null">
 				price=#{price},
@@ -84,5 +99,19 @@
 		<where>
 			id=#{id}
 		</where>
-	</update>  -->
+	</update>  
+		
+	<update id="buyProduct" parameterType="Product">
+		update product
+		set
+			buyPrice=price,
+			saleNum=#{saleNum},
+			isSell=#{isSell},
+		    isBuy=#{isBuy},
+			buyNum=#{buyNum},
+			buyTime=#{buyTime}
+		<where>
+			id=#{id}
+		</where>
+	</update>   
 </mapper>

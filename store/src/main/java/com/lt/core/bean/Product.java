@@ -27,6 +27,18 @@ public class Product implements Serializable{
     private Boolean isSell;
     
     private Integer saleNum;
+    
+    private Integer number;
+    
+
+    
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
 
 	public Integer getId() {
 		return id;

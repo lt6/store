@@ -39,9 +39,8 @@ public class CommonController extends HttpServlet{
 		//加载用户
 		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
 			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
-/*			Integer type=user.getUserType();
-			System.out.println(user.getUserType());
-			model.addAttribute("type", type);*/
+			Integer type=user.getUserType();
+			model.addAttribute("listType", type);
 			model.addAttribute("user", user);
 			List<Product> productList=productService.getProductList();
 			model.put("productList", productList);
@@ -65,7 +64,7 @@ public class CommonController extends HttpServlet{
 	public String show(HttpServletRequest request,Integer id,ModelMap model){
 		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
 			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
-			System.out.println(user.getUserType());
+			/*System.out.println(user.getUserType());*/
 			model.addAttribute("user", user);
 			Product product=productService.show(id);
 			model.addAttribute("product", product);
@@ -82,10 +81,10 @@ public class CommonController extends HttpServlet{
 	public void login (HttpServletRequest request,HttpServletResponse response,ModelMap model){
 			String userName=request.getParameter("userName");
 			String password=request.getParameter("password");
-			System.out.println(userName);
+			/*System.out.println(userName);*/
 			User user=userService.getUserByUsername(userName);
 			if(user.getPassword().equals(password)){
-				System.out.println(user.getPassword());
+			/*	System.out.println(user.getPassword());*/
 			//把用户对象放在Session
 			//model.addAttribute("user", user);
 			sessionProvider.setAttribute(request, Constants.PERSON_SESSION, user);
