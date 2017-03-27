@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,12 +39,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
+import com.lt.common.Constants;
 import com.lt.common.ResponseUtils;
 import com.lt.common.session.SessionProvider;
 import com.lt.core.bean.Product;
 import com.lt.core.bean.User;
 import com.lt.core.service.product.ProductService;
-import com.lt.web.Constants;
+
 
 @Controller
 public class BuyerController extends HttpServlet{
@@ -55,8 +57,8 @@ public class BuyerController extends HttpServlet{
 	//账务页
 	@RequestMapping(value = "/account.do")
 	public String show(HttpServletRequest request,ModelMap model){
-		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+		User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
+		if(user!=null && user.getUserType()==0){
 			model.addAttribute("user", user);
 			List<Product> buyList=productService.getBuyList();
 			model.put("buyList", buyList);
@@ -66,31 +68,12 @@ public class BuyerController extends HttpServlet{
 		}
 
 	}
-	//查看未购买商品
-	@RequestMapping(value = "/unBuy.do")
-	public String unBuy(HttpServletRequest request,ModelMap model){
-		//加载用户
-		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
-			Integer type=user.getUserType();
-			model.addAttribute("listType", type);
-			model.addAttribute("user", user);
-			List<Product> productList=productService.getBuyList();
-			model.put("productList", productList);
-			return "index";
-		}else{
-			List<Product> productList=productService.getProductList();
-			model.put("productList", productList);
-			return "index";
-		}
 
-	}
-
-		//去购物车
+		//购物车页面
 		@RequestMapping(value = "/settleAccount.do")
 		public String settleAccount(HttpServletRequest request,ModelMap model){
-			if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-				User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+			User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
+			if(user!=null && user.getUserType()==0){
 				model.addAttribute("user", user);
 				return "settleAccount";
 			}else{
@@ -98,12 +81,12 @@ public class BuyerController extends HttpServlet{
 			}
 
 		}
-		//确认购买
+		//购买
 		@RequestMapping(value = "/api/buy.do", method = {RequestMethod.POST })
 		@ResponseBody
 		public String buy(@RequestBody String buyList,HttpServletRequest request,HttpServletResponse response,ModelMap model) {
-		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+		User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
+		if(user!=null && user.getUserType()==0){
 			model.addAttribute("user", user);
 			List<Product> pro_list = new ArrayList<Product>(JSONArray.parseArray(buyList, Product.class));
 			for(Product p : pro_list){

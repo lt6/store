@@ -13,13 +13,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lt.common.Constants;
 import com.lt.common.ResponseUtils;
 import com.lt.common.session.SessionProvider;
 import com.lt.core.bean.Product;
 import com.lt.core.bean.User;
 import com.lt.core.service.product.ProductService;
 import com.lt.core.service.user.UserService;
-import com.lt.web.Constants;
 
 
 
@@ -33,12 +33,12 @@ public class CommonController extends HttpServlet{
 	@Autowired
 	private ProductService productService;
 	
-	//去首页
+	//首页
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request,ModelMap model){
 		//加载用户
-		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+		User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
+		if(user!=null){
 			Integer type=user.getUserType();
 			model.addAttribute("listType", type);
 			model.addAttribute("user", user);
@@ -52,19 +52,18 @@ public class CommonController extends HttpServlet{
 		}
 
 	}
-	//去登录页
+	//登录页
 	@RequestMapping(value = "/login.do")
 	public String login(){
 		return "login";
 	}
 	
 	
-	//去查看页
+	//查看页
 	@RequestMapping(value = "/show.do")
 	public String show(HttpServletRequest request,Integer id,ModelMap model){
-		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
-			/*System.out.println(user.getUserType());*/
+		User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
+		if(user!=null){
 			model.addAttribute("user", user);
 			Product product=productService.show(id);
 			model.addAttribute("product", product);
@@ -81,13 +80,10 @@ public class CommonController extends HttpServlet{
 	public void login (HttpServletRequest request,HttpServletResponse response,ModelMap model){
 			String userName=request.getParameter("userName");
 			String password=request.getParameter("password");
-			/*System.out.println(userName);*/
 			User user=userService.getUserByUsername(userName);
 			if(user.getPassword().equals(password)){
-			/*	System.out.println(user.getPassword());*/
 			//把用户对象放在Session
-			//model.addAttribute("user", user);
-			sessionProvider.setAttribute(request, Constants.PERSON_SESSION, user);
+			sessionProvider.setAttribute(request, Constants.UER_SESSION, user);
 			JSONObject jo = new JSONObject();
 			int code=200;
 			jo.put("code",code);
@@ -104,10 +100,10 @@ public class CommonController extends HttpServlet{
 			}
 
 	}
-	//退出登录
+	//退出
 	@RequestMapping(value = "/logout.do")
 	public String logout(HttpServletRequest request,HttpServletResponse response,ModelMap model){
-		User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+		User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
 		sessionProvider.logout(request, response);
 		return "redirect:/login.do";
 	}

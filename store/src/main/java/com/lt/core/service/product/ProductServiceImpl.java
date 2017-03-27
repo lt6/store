@@ -52,13 +52,6 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 
-
-	public List<Product> getUnBuyList() {
-		List<Product> unBuyList=productDao.getUnBuyList();
-		return unBuyList;
-	}
-
-
 	public void deleteProduct(Integer id) {
 		productDao.deleteProductByKey(id);
 	}

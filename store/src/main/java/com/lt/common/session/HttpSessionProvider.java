@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.lt.web.Constants;
+import com.lt.common.Constants;
+
 
 
 /**
@@ -40,7 +41,7 @@ public class HttpSessionProvider implements SessionProvider{
 		if(session != null){
 			session.invalidate();
 		}
-		Cookie c  = new Cookie(Constants.PERSON_SESSION,null);
+		Cookie c  = new Cookie(Constants.UER_SESSION,null);
 		c.setMaxAge(0);
 		response.addCookie(c);
 	}

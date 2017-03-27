@@ -9,7 +9,6 @@ import org.apache.commons.beanutils.converters.DateConverter;
 
 /**
  * 小小工具
- * @author qdmmy6
  *
  */
 public class CommonUtils {

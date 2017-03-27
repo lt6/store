@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,12 +19,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lt.common.CommonUtils;
+import com.lt.common.Constants;
 import com.lt.common.ResponseUtils;
 import com.lt.common.session.SessionProvider;
 import com.lt.core.bean.Product;
 import com.lt.core.bean.User;
 import com.lt.core.service.product.ProductService;
-import com.lt.web.Constants;
+
 
 
 @Controller
@@ -35,18 +35,18 @@ public class SellerController extends HttpServlet{
 	@Autowired
 	private SessionProvider sessionProvider;
 	
-	//去发布页
+	//发布页
 	@RequestMapping(value = "/public.do")
 	public String toPublic(HttpServletRequest request,ModelMap model){
-		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+		User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
+		if(user!=null && user.getUserType()==1){
 			model.addAttribute("user", user);
 			return "public";
 		}else{
 			return "login";
 		}
 	}
-	//删除产品
+	//删除
 	@RequestMapping(value = "/api/delete.do")
 	public void delete(Integer id, HttpServletResponse response){
 		productService.deleteProduct(id);
@@ -58,11 +58,11 @@ public class SellerController extends HttpServlet{
 		ResponseUtils.renderJson(response, jo.toString());
 	}
 
-	//发布提交
+	//发布
 	@RequestMapping(value = "/publicSubmit.do")
 	public String publicSubmit(HttpServletRequest request,Product product,ModelMap model){
-		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+		User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
+		if(user!=null && user.getUserType()==1){
 			model.addAttribute("user", user);
 			productService.addProduct(product);
 			model.put("product", product);
@@ -74,8 +74,8 @@ public class SellerController extends HttpServlet{
 	//编辑页
 	@RequestMapping(value = "/edit.do")
 	public String edit(HttpServletRequest request,Integer id,ModelMap model){
-		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+		User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
+		if(user!=null && user.getUserType()==1){
 			model.addAttribute("user", user);
 			Product product=productService.show(id);
 			model.put("product", product);
@@ -88,8 +88,8 @@ public class SellerController extends HttpServlet{
 	//编辑提交
 	@RequestMapping(value = "/editSubmit.do")
 	public String editSubmit(HttpServletRequest request,Product product,ModelMap model){
-		if(sessionProvider.getAttribute(request, Constants.PERSON_SESSION)!=null){
-			User user = (User) sessionProvider.getAttribute(request, Constants.PERSON_SESSION);
+		User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
+		if(user!=null && user.getUserType()==1){
 			model.addAttribute("user", user);
 			productService.updateProductByKey(product);
 			model.put("product", product);
@@ -98,7 +98,7 @@ public class SellerController extends HttpServlet{
 			return "login";
 		}
 	}
-	
+	//异步上传图片
 	@RequestMapping(value = "/api/upload.do")
 	public void uploadPic(HttpServletRequest request,PrintWriter out, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -112,30 +112,28 @@ public class SellerController extends HttpServlet{
 
 					// 获取上传文件的保存目录
 					String savepath = request.getSession().getServletContext().getRealPath("/upload");
-					String uuid = CommonUtils.uuid();//生成uuid
-					String filename = uuid + "_" + name;//新的文件名称为uuid + 下划线 + 原始名称
-							
+					//生成uuid
+					String uuid = CommonUtils.uuid();
+					//新的文件名称为uuid + 下划线 + 原始名称
+					String filename = uuid + "_" + name;
 					//创建file对象，下面会把上传文件保存到这个file指定的路径
 					//savepath，即上传文件的保存目录
 					//filename，文件名称
 					File file = new File(savepath, filename);
-					String url=Constants.IMAGE_URL+"\\"+filename;
-					String relative="upload/"+filename;
+					String url="upload/"+filename;
 					
 					FileOutputStream fos=new FileOutputStream(file);
 				    fos.write(fbytes);
 				    fos.close();  
 				         
-					//返回二个路径
+					//JSON返回路径
 					JSONObject jo = new JSONObject();
 					int code=200;
 					jo.put("code",code);
 					jo.put("message", "上传成功");
-					jo.put("result", relative);
-					//jo.put("url", url);
+					jo.put("result", url);
 					ResponseUtils.renderJson(response, jo.toString());
-					
-				} catch (Exception e) {
+					} catch (Exception e) {
 					throw new ServletException(e);
 				} 
 

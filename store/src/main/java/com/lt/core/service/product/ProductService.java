@@ -22,9 +22,6 @@ public interface ProductService {
 	//查询所有已购买商品
 	List<Product> getBuyList();
 	
-	//查询所有未购买商品
-	List<Product> getUnBuyList();
-	
 	//通过id查看商品
 	public Product show(Integer id);
 	

@@ -21,7 +21,7 @@
 		from product
 	</select>
 	
-	  	<!-- 查询已购买商品集合 -->
+	 <!-- 查询已购买商品集合 -->
 	<select id="getBuyList" resultMap="product">
 		select id,title,image,buyPrice,buyNum,buyTime
 		from product
@@ -29,15 +29,7 @@
 			isBuy = 1
 		</where>
 	</select>
-		  	<!-- 查询未购买商品集合 -->
-	<select id="getUnBuyList" resultMap="product">
-		select id,title,image,buyPrice,buyNum,buyTime
-		from product
-		<where>
-			isBuy != 1
-		</where>
-	</select>
-	
+
 	<!-- 删除 通过主键 -->
 	<delete id="deleteProductByKey" parameterType="Integer">
 		delete from product
