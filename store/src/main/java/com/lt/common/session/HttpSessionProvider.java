@@ -13,8 +13,6 @@ import com.lt.common.Constants;
 
 /**
  * Session提供类
- * @author lx
- *
  */
 public class HttpSessionProvider implements SessionProvider{
 
