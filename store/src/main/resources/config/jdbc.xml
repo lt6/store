@@ -15,7 +15,17 @@
 		<property name="driverClass" value="${driverClass}"/>
 		<property name="jdbcUrl" value="${jdbcUrl}"></property>
 		<property name="user" value="${user}" />
-		<property name="password" value="${password}"/>
+		<property name="minPoolSize" value="${minPoolSize}"/>
+		<property name="maxPoolSize" value="${maxPoolSize}"/>
+		<property name="initialPoolSize" value="${initialPoolSize}"/>
+		<property name="maxIdleTime" value="${maxIdleTime}"/>
+		<property name="acquireIncrement" value="${acquireIncrement}"/>
+		<property name="acquireRetryAttempts" value="${acquireRetryAttempts}"/>
+		<property name="acquireRetryDelay" value="${acquireRetryDelay}"/>
+		<property name="testConnectionOnCheckin" value="${testConnectionOnCheckin}"/>
+		<property name="automaticTestTable" value="${automaticTestTable}"/>
+		<property name="checkoutTimeout" value="${checkoutTimeout}"/>
+		
 	</bean>
 
 	

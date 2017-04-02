@@ -61,9 +61,8 @@
 		            	  if (xhr.status === 200) {
 		            	    alert("文件上传成功");
 		            	    var o = JSON.parse(xhr.responseText);
-		            	    imageUrl = o.result;
-		            	    image.value = imageUrl;
-		            	    imgpre.src = imageUrl;
+		            	    image.value = o.url;
+		            	    imgpre.src = o.result;
 		            	  } else {
 		            	    alert('An error occurred!');
 		            	  }
