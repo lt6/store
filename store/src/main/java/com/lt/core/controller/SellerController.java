@@ -48,14 +48,20 @@ public class SellerController extends HttpServlet{
 	}
 	//删除
 	@RequestMapping(value = "/api/delete.do")
-	public void delete(Integer id, HttpServletResponse response){
-		productService.deleteProduct(id);
-		JSONObject jo = new JSONObject();
-		int code=200;
-		jo.put("code",code);
-		jo.put("message", "删除成功");
-		jo.put("result", true);
-		ResponseUtils.renderJson(response, jo.toString());
+	public String delete(HttpServletRequest request,Integer id, HttpServletResponse response){
+		User user = (User) sessionProvider.getAttribute(request, Constants.UER_SESSION);
+		if(user!=null && user.getUserType()==1){
+			productService.deleteProduct(id);
+			JSONObject jo = new JSONObject();
+			int code=200;
+			jo.put("code",code);
+			jo.put("message", "删除成功");
+			jo.put("result", true);
+			ResponseUtils.renderJson(response, jo.toString());
+			return null;
+		}else{
+			return "login";
+		}
 	}
 
 	//发布
