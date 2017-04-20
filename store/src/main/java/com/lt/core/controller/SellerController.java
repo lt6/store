@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -105,7 +106,7 @@ public class SellerController extends HttpServlet{
 		}
 	}
 	//异步上传图片
-	@RequestMapping(value = "/api/upload.do")
+	@RequestMapping(value = "/api/upload.do",method = RequestMethod.POST)
 	public void uploadPic(HttpServletRequest request,PrintWriter out, HttpServletResponse response)
 			throws ServletException, IOException {
 				request.setCharacterEncoding("utf-8");
