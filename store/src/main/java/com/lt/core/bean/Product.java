@@ -6,7 +6,7 @@ import java.util.Date;
 public class Product implements Serializable{
     private Integer id;
 
-    private Long price;
+    private Double price;
 
     private String title;
 
@@ -18,7 +18,7 @@ public class Product implements Serializable{
     
     private Boolean isBuy;
     
-    private Integer buyPrice;
+    private Double buyPrice;
     
     private Integer buyNum;
     
@@ -48,11 +48,11 @@ public class Product implements Serializable{
 		this.id = id;
 	}
 
-	public Long getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -96,11 +96,11 @@ public class Product implements Serializable{
 		this.isBuy = isBuy;
 	}
 
-	public Integer getBuyPrice() {
+	public Double getBuyPrice() {
 		return buyPrice;
 	}
 
-	public void setBuyPrice(Integer buyPrice) {
+	public void setBuyPrice(Double buyPrice) {
 		this.buyPrice = buyPrice;
 	}
 

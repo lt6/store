@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lt.core.bean.Product;
 import com.lt.core.dao.ProductDao;
 @Service
@@ -36,22 +38,22 @@ public class ProductServiceImpl implements ProductService {
 		return buyList;
 	}
 	
-	
+	@Transactional
 	public void addProduct(Product product) {
 		 productDao.addProduct(product);
 	}
 
-
+	@Transactional
 	public void updateProductByKey(Product product) {
 		productDao.updateProductByKey(product);
 	}
 
-
+	@Transactional
 	public void buyProduct(Product product) {
 		productDao.buyProduct(product);
 		
 	}
-
+	@Transactional
 	public void deleteProduct(Integer id) {
 		productDao.deleteProductByKey(id);
 	}
